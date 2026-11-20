@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+backups/
+gui-test-screenshots/
+.video_agent/
+.workbuddy/

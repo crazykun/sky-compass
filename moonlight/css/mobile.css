@@ -1,0 +1,43 @@
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;padding:26px 22px;gap:20px}
+  .hero-info h2{font-size:28px}
+  .grid{grid-template-columns:repeat(6,1fr)}
+  #solarCanvas{height:420px}
+  .tl-main{grid-template-columns:1fr;gap:16px}
+  .tl-read{text-align:left;min-width:0}
+  .tl-row{align-items:flex-start}
+  #tlRange{width:100%;flex-basis:100%;order:3}
+  .moon-detail{grid-template-columns:1fr;padding:22px;gap:18px}
+  .poem{padding:22px}
+  .cause{overflow-x:auto;overscroll-behavior-x:contain}
+  #causeCanvas{min-width:640px}
+}
+@media(max-width:480px){
+  .wrap{padding-left:16px;padding-right:16px}
+  header{padding-top:38px}
+  .theme-btn,.home-link{padding:10px 18px}
+  #kidBtn{margin-left:0!important}
+  .grid{grid-template-columns:repeat(5,1fr);gap:6px}
+  .calendar{padding:20px 14px 24px}
+  .cell canvas{width:34px;height:34px}
+  .stats{gap:8px}
+  .stat{padding:12px 5px}
+  .stat .val{font-size:18px}
+  .today-strip,.mode-strip{padding:14px 16px}
+  .today-strip .lunar{margin-left:0;display:block;margin-top:5px}
+  .mode-controls{align-items:stretch}
+  .date-picker{width:100%;justify-content:space-between}
+  .date-picker input{flex:1;max-width:none}
+  .timeline{padding:20px 16px}
+  .tl-row{gap:12px}
+  .tl-meta{gap:12px}
+  .tl-ticks{font-size:9px}
+  .poem-body{gap:16px}
+  .poem-alias{flex-basis:100%;padding:12px}
+  .solar-panel,.note{padding-left:18px;padding-right:18px}
+  .kid-story br{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}

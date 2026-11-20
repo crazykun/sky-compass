@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="追光寻月——小学生天空科学探索站：抬头看天空，动手找方向。第一章「追光寻月」带你认识太阳的光和月亮的脸。">
+<title>追光寻月 · 小学生天空科学探索站</title>
+<link rel="stylesheet" href="./css/home.css">
+</head>
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="horizon" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">SKY COMPASS · 天空科学探索站</div>
+    <h1>追光寻月</h1>
+    <div class="subtitle">小学生天空科学探索站</div>
+    <p class="slogan">抬头看天空，动手找方向。</p>
+  </header>
+
+  <section class="section" aria-labelledby="chTitle">
+    <div class="sec-head">
+      <h3 id="chTitle">🧭 探索章节</h3>
+      <p>每一章都是一次「观察 + 动手」的天空探险</p>
+    </div>
+
+    <a class="chapter card" href="./moonlight/">
+      <div class="ch-icon" aria-hidden="true">🌙</div>
+      <div class="ch-body">
+        <span class="ch-badge">第一章 · 已开放</span>
+        <h2>追光寻月</h2>
+        <p class="ch-sub">月相奇观 · 真实天文 × 教学模拟</p>
+        <p class="ch-desc">太阳把月亮照亮，我们看见它的圆缺变化。查一查<b>今天真实的月相</b>，拖一拖<b>日地月三体模型</b>，转一转<b>月面上的环形山</b>，还有专为小朋友准备的<b>月亮变变变</b>模式。</p>
+        <div class="ch-tags">
+          <span>📅 真实月相历</span><span>🪐 日地月之舞</span><span>🔭 月面地标</span><span>📜 咏月诗词</span><span>🧒 儿童模式</span>
+        </div>
+      </div>
+      <span class="ch-go" aria-hidden="true">进入章节 →</span>
+    </a>
+
+    <div class="chapter-soon card" aria-label="更多章节规划中">
+      <div class="soon-item"><span class="ch-icon dim" aria-hidden="true">☀️</span><div><b>第二章 · 光的方向</b><small>影子、日晷与辨方向 · 规划中</small></div></div>
+      <div class="soon-item"><span class="ch-icon dim" aria-hidden="true">⭐</span><div><b>第三章 · 星与罗盘</b><small>认星星、找北极星 · 规划中</small></div></div>
+    </div>
+  </section>
+
+  <section class="section about card" aria-labelledby="aboutTitle">
+    <h3 id="aboutTitle">✨ 写给小探险家</h3>
+    <p>探索天空<b>不需要昂贵的器材</b>：晴天抬头追太阳的光，夜里找一找月亮的脸。每一章都配有可以动手玩的互动模型和小知识，观察与实验都在页面上完成。</p>
+    <p class="tip">小提示：第一章里的「真实天文」模式由天文历表实时计算，「教学模拟」模式则把规律简化成好懂的动画——看的时候记得分清楚哦。</p>
+  </section>
+
+  <footer>
+    追光寻月 · 小学生天空科学探索站<br>
+    <a href="https://github.com/crazykun/sky-compass" target="_blank" rel="noopener">GitHub</a> · 第三方素材与授权见 <a href="./docs/attribution.md">素材说明</a>
+  </footer>
+</div>
+<noscript><p style="text-align:center;padding:20px">星空背景动画需要启用 JavaScript，章节链接不受影响。</p></noscript>
+<script src="./js/home.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+body.space{--bg1:#000106;--bg2:#040814;--bg3:#0a1230;--text:#f2f5ff;--muted:#96a3cc;--dim:#6b78a4;--card:rgba(120,150,255,.045);--card-hi:rgba(120,150,255,.09);--line:rgba(150,180,255,.16);--gold:#ffe6a0;--blue:#8fd6ff;--glow:rgba(150,200,255,.14)}
+body.space .horizon{opacity:0}
+body.kid header,body.kid .hero,body.kid .section,body.kid footer{display:none}
+#kidView{display:none;padding-top:34px}
+body.kid #kidView{display:block}
+.kid-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.kid-title{font-size:clamp(30px,6vw,50px);font-weight:800;color:#ffd54a;text-shadow:0 4px 0 #b36b00,0 0 34px rgba(255,213,74,.45);line-height:1.15}
+.kid-title small{display:block;font-size:14px;letter-spacing:.14em;color:#ffe9a8;margin-top:8px;font-weight:600;text-shadow:none}
+.kid-back{padding:12px 22px;border-radius:999px;border:3px solid #ffd54a;background:rgba(255,213,74,.14);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:.2s}
+.kid-back:hover{background:#ffd54a;color:#3a2400}
+.kid-story{background:linear-gradient(135deg,rgba(255,183,77,.18),rgba(255,213,74,.08));border:3px solid rgba(255,213,74,.5);border-radius:28px;padding:22px 26px;font-size:19px;line-height:2;color:#fff}
+.kid-story .hi{font-size:22px;font-weight:800;color:#ffd54a}
+.kid-story em{font-style:normal;color:#8fd6ff;font-weight:700}
+.kid-h{font-size:25px;font-weight:800;color:#fff;margin:32px 0 16px}
+.kid-h span{color:#ffd54a}
+.kid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.kid-card{background:var(--card);border:3px solid var(--line);border-radius:26px;padding:18px 14px 20px;text-align:center;cursor:pointer;transition:.2s;color:#fff}
+.kid-card:hover,.kid-card:active{transform:translateY(-6px) scale(1.03);border-color:#ffd54a;box-shadow:0 12px 34px rgba(255,213,74,.25)}
+.kid-card.sel{border-color:#ffd54a;background:rgba(255,213,74,.12)}
+.kid-card canvas{width:118px;height:118px;display:block;margin:0 auto}
+.kid-face{font-size:30px;line-height:1.2}
+.kid-name{font-size:21px;font-weight:800;margin-top:4px;color:#fff}
+.kid-py{font-size:12px;color:#ffd54a;letter-spacing:.06em}
+.kid-say{margin-top:18px;padding:18px 24px;background:rgba(255,213,74,.12);border-radius:22px;font-size:19px;color:#fff;min-height:58px;display:flex;align-items:center;gap:12px;line-height:1.7}
+.kid-say b{color:#ffd54a}
+.kid-game{margin-top:34px;background:var(--card);border:3px solid rgba(143,214,255,.4);border-radius:28px;padding:24px;text-align:center}
+.kid-game .q{font-size:22px;font-weight:800;color:#8fd6ff;margin-bottom:18px}
+#kidQuizMoon{width:160px;height:160px;display:block;margin:0 auto 18px;filter:drop-shadow(0 0 24px var(--glow))}
+.kid-opts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.kid-opt{padding:14px 22px;font-size:18px;font-weight:700;border-radius:16px;border:3px solid var(--line);background:var(--card-hi);color:#fff;cursor:pointer;transition:.2s}
+.kid-opt:hover{border-color:#8fd6ff;transform:translateY(-3px)}
+.kid-opt.on{background:rgba(143,214,255,.18);border-color:#8fd6ff;color:#8fd6ff}
+.kid-opt.right{background:#43a047;border-color:#66bb6a}
+.kid-opt.wrong{background:#d32f2f;border-color:#ef5350}
+.kid-opt:disabled{cursor:default;opacity:.65;transform:none}
+.kid-next{border-style:dashed}
+.kid-fb{font-size:17px;font-weight:800;color:#ffd54a;margin-top:18px;min-height:28px;line-height:1.6}
+.kid-note{margin-top:26px;text-align:center;font-size:15px;color:var(--muted);line-height:2}
+.kid-orbit-card{margin-top:34px;background:var(--card);border:3px solid rgba(143,214,255,.45);border-radius:28px;padding:24px;text-align:center}
+.kid-orbit-card .q{font-size:22px;font-weight:800;color:#8fd6ff;margin-bottom:6px}
+.kid-orbit-card .qs{font-size:14px;color:var(--muted);margin-bottom:16px}
+#kidSolarCanvas{width:100%;max-width:720px;height:auto;display:block;margin:0 auto;border-radius:20px;background:rgba(4,9,28,.55)}
+.kid-orbit-ctrl{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:center;margin-top:18px}
+.kid-orbit-ctrl button{font-size:17px;padding:12px 22px}
+.kid-orbit-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.kid-orbit-legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:16px;font-size:14px;color:var(--muted)}
+.kid-orbit-legend b{color:#fff}
+.kid-orbit-legend .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.kid-pop{animation:pop .45s ease}

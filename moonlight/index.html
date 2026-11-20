@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="真实天文与教学模拟双模式月相科普：月相日历、日地月互动、时间轴、月面地标和儿童模式。">
+<title>追光寻月 · 月相奇观 | 天空科学探索站</title>
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/theme.css">
+<link rel="stylesheet" href="./css/layout.css">
+<link rel="stylesheet" href="./css/mobile.css">
+</head>
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="horizon" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">LUNAR PHASES</div>
+    <h1>月相奇观</h1>
+    <div class="subtitle">真实天文 × 教学模拟 · 从朔到望，再从望到朔</div>
+    <div class="back-home"><a class="home-link" href="../">🧭 返回探索站首页</a></div>
+    <button type="button" class="theme-btn" id="themeBtn">🌌 切换到太空</button>
+    <button type="button" class="theme-btn" id="kidBtn" style="margin-left:10px">🧒 小朋友模式</button>
+  </header>
+
+  <div id="kidView">
+    <div class="kid-top">
+      <div class="kid-title">🌙 月亮变变变<small>yuè liàng biàn biàn biàn</small></div>
+      <button type="button" class="kid-back" id="kidBack">👋 回到大月亮</button>
+    </div>
+    <div class="kid-story">
+      <div class="hi">🌞 太阳公公 + 🌍 地球妈妈 + 🌙 月亮宝宝</div>
+      月亮宝宝自己<em>不会发光</em>，是太阳公公把它照亮。它绕着地球妈妈转圈圈，<br>
+      我们在地球上看它——有时候圆圆的，有时候弯弯的，这就是<em>月相</em>（yuè xiàng）！<br>
+      月亮从看不见，慢慢长圆，再慢慢变弯，就像<em>一个月亮小饼干被一口一口吃掉</em>。
+    </div>
+    <div class="kid-orbit-card">
+      <div class="q">🌞🌍🌙 一起来转圈圈</div>
+      <div class="qs">点一点下面的问题，看看谁在转、谁绕谁转</div>
+      <canvas id="kidSolarCanvas" width="720" height="420" role="img" aria-label="太阳、地球和月球自转公转示意图"></canvas>
+      <div class="kid-orbit-tabs">
+        <button type="button" class="kid-opt on" data-kq="spin">🙂 什么是「自转」？</button>
+        <button type="button" class="kid-opt" data-kq="orbit">🔄 什么是「公转」？</button>
+        <button type="button" class="kid-opt" data-kq="all">🌞🌍🌙 一起看</button>
+      </div>
+      <div class="kid-orbit-ctrl">
+        <button type="button" class="btn" id="kidSolarPlay">⏸ 暂停</button>
+        <button type="button" class="btn" id="kidSolarSpeed">🐢 慢一点</button>
+      </div>
+      <div class="kid-orbit-legend">
+        <span><i class="sw" style="background:#ffcc55"></i><b>太阳公公</b> 中间自己转</span>
+        <span><i class="sw" style="background:#5aa9ff"></i><b>地球妈妈</b> 绕太阳 + 自己转</span>
+        <span><i class="sw" style="background:#eee8d6"></i><b>月亮宝宝</b> 绕地球 + 自己转</span>
+      </div>
+      <div class="kid-say" id="kidSolarSay" style="text-align:left"></div>
+    </div>
+    <div class="kid-h">👀 月亮的 <span>四种样子</span>（点一点，听它说话）</div>
+    <div class="kid-grid" id="kidGrid"></div>
+    <div class="kid-say" id="kidSay" aria-live="polite">👆 点上面的月亮，听月亮宝宝讲故事～</div>
+    <div class="kid-game">
+      <div class="q">🎮 小游戏：这是什么样的月亮？</div>
+      <canvas id="kidQuizMoon" width="320" height="320" role="img" aria-label="答题用月相图"></canvas>
+      <div class="kid-opts" id="kidOpts"></div>
+      <div class="kid-fb" id="kidFb" aria-live="polite"></div>
+    </div>
+    <div class="kid-note">🌕 月亮圆圆的时候，我们叫它「满月」，中秋节看到的就是它。<br>🌙 月亮弯弯像小船的时候，叫「月牙」。它每天变一点点，约 29.53 天变完一个圈。</div>
+  </div>
+
+  <section class="hero card" aria-labelledby="dayTitle">
+    <div class="moon-stage"><div class="moon-orbit-ring" aria-hidden="true"></div><canvas id="moonCanvas" width="400" height="400" role="img" aria-label="当前月相"></canvas></div>
+    <div class="hero-info">
+      <span class="mode-badge" id="modeBadge">真实天文</span>
+      <h2 id="dayTitle">正在计算月相…</h2>
+      <div class="alias" id="alias"></div>
+      <div class="desc" id="desc"></div>
+      <div class="astro-facts" id="astroFacts"></div>
+      <div class="stats">
+        <div class="stat"><div class="val" id="phaseName">—</div><div class="lab">月相</div></div>
+        <div class="stat"><div class="val" id="illumVal">—</div><div class="lab">亮面比例</div></div>
+        <div class="stat"><div class="val" id="dayVal">—</div><div class="lab">农历日</div></div>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="illumBar" style="width:0%"></i></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3 id="calendarTitle">🌙 真实月相历 · 点击探索</h3><p id="calendarSubtitle">按当前朔望月展示真实的 29 或 30 个农历日</p></div>
+    <div class="today-strip card">
+      <div class="date">📅 今天 <span id="todaySolar"></span><span class="lunar" id="todayLunar"></span></div>
+      <button type="button" class="btn" id="todayBtn">📍 回到今天</button>
+    </div>
+    <div class="mode-strip card">
+      <div class="mode-controls">
+        <div class="mode-switch" role="group" aria-label="月相计算模式">
+          <button type="button" class="btn on" id="realMode" aria-pressed="true">真实天文</button>
+          <button type="button" class="btn" id="simMode" aria-pressed="false">教学模拟</button>
+        </div>
+        <label class="date-picker" for="astroDate">选择日期 <input type="date" id="astroDate" min="1900-01-31" max="2100-12-31" value="2026-11-20"></label>
+      </div>
+      <div class="mode-note" id="modeNote">真实模式：关键时刻由 Astronomy Engine 计算；手动选日展示当地 12:00，回到今天展示当前时刻。</div>
+      <div class="error-text" id="dateError" role="alert"></div>
+    </div>
+    <div class="calendar card"><div class="grid" id="grid" role="group" aria-label="月相日历"></div></div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3>💡 月相成因 · 一张图看懂</h3><p>太阳照亮月球一半，从地球看到多少亮面，就是什么月相</p></div>
+    <div class="cause card">
+      <canvas id="causeCanvas" width="960" height="470" role="img" aria-label="朔、上弦、望、下弦形成原理；点击四个月相可切换"></canvas>
+      <div class="cause-read" id="causeRead" aria-live="polite">点击图中任意月球或下方月相，查看该位置从地球看到的样子。</div>
+      <div class="cause-explain">
+        <div class="ex"><h4>① 月亮自己不发光</h4><p>月球是<b>不发光</b>的岩石球，太阳把它<b>恰好一半</b>照亮。图上四个月球的亮面都朝向左侧的太阳——不管月球转到轨道哪个位置，这一点都不变。</p><span class="kv">关键词：太阳直射 · 永远半明半暗</span></div>
+        <div class="ex"><h4>② 月相是「视角游戏」</h4><p>月球绕地球公转，我们站在地球上看它那半个亮面。位置不同，<b>能看到的比例</b>就不同：全看不到是朔，看到一半是弦，全看到是望。</p><span class="kv">关键词：视线角度 · 露出多少</span></div>
+        <div class="ex"><h4>③ 四个关键位置</h4><p><b>朔</b>：月球在日地之间。<b>上弦</b>：日地月成直角。<b>望</b>：地球在日月之间。<b>下弦</b>：另一侧直角。初一、初八、十五、廿三只是<b>近似日期</b>，真实时刻每月不同。</p><span class="kv">关键词：真实时刻不固定</span></div>
+        <div class="ex"><h4>④ 两个常见误区</h4><p>月相<b>不是地球的影子</b>——地球挡住阳光那是<b>月食</b>。月相也不是地球反射的光；蛾眉月暗面可见的微弱「地照」是另一现象，不是亮面的来源。</p><span class="kv">关键词：非月食 · 非地照</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3>🪐 三体之舞 · 日地月自转与公转</h3><p>位置与大小为教学示意；联动时同步当前真实日期或教学月相</p></div>
+    <div class="solar card">
+      <canvas id="solarCanvas" role="img" aria-label="可拖拽旋转的日地月教学模型"></canvas>
+      <div class="solar-panel">
+        <button type="button" class="btn on" id="playBtn" aria-pressed="true">⏸ 暂停</button>
+        <button type="button" class="btn" id="linkBtn" aria-pressed="false">🔗 联动月相演示</button>
+        <button type="button" class="btn on" id="autoRotBtn" aria-pressed="true">🔄 自动旋转</button>
+        <button type="button" class="btn" id="focusBtn" aria-pressed="false">🔍 聚焦月球</button>
+        <label>速度 <input type="range" id="speed" min="0" max="100" value="35" aria-label="模拟速度"></label>
+        <label><input type="checkbox" id="showOrbit" checked> 轨道</label>
+        <label><input type="checkbox" id="showShadow" checked> 光锥/投影</label>
+        <button type="button" class="btn" id="resetBtn">↺ 重置</button>
+      </div>
+      <div class="note"><b>教学模型不按真实距离、大小或速度比例。</b>月球和地球的亮面始终朝向太阳；右上角小窗是从地球看到的月相。<br><b>拖拽画布可旋转视角</b>；金色光锥是地球本影，细锥是月球投向地球的影子。开启联动会停止时间轴播放，真实模式下会将位置映射到当前朔望月的日期。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3>🎬 月相时间轴 · 连续变化</h3><p id="timelineSubtitle">沿真实朔望月或教学周期查看连续变化</p></div>
+    <div class="timeline card">
+      <div class="tl-main">
+        <div class="tl-moon-wrap"><canvas id="tlMoon" width="360" height="360" role="img" aria-label="时间轴当前月相"></canvas><div class="tl-moon-label" id="tlMoonLabel">—</div></div>
+        <div class="tl-info">
+          <div class="tl-row"><button type="button" class="btn" id="tlPlay" aria-pressed="false">▶ 播放</button><input type="range" id="tlRange" min="0" max="10000" value="0" aria-label="月相时间轴"><span class="tl-read" id="tlRead">—</span></div>
+          <div class="tl-meta"><span>当前 <b id="tlPhase">—</b></span><span>亮面 <b id="tlIllum">—</b></span><span>农历 <b id="tlDay">—</b></span></div>
+          <div class="tl-explain" id="tlExplain">拖动滑块或点击播放。手动点击日历会停止时间轴与 3D 联动，避免多个状态互相覆盖。</div>
+        </div>
+      </div>
+      <div class="tl-ticks" id="tlTicks"></div>
+      <div class="tl-mini" id="tlMini"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3>🔭 月面细节 · 真实纹理与地标</h3><p>基于 NASA 月面影像，标注主要月海与环形山</p></div>
+    <div class="moon-detail card">
+      <div class="md-stage">
+        <canvas id="detailCanvas" width="760" height="760" role="img" aria-label="可拖动旋转的月面纹理"></canvas>
+        <div class="md-ctrl"><button type="button" class="btn on" id="mdAuto">🔄 自转</button><button type="button" class="btn" id="mdFront">正面</button><button type="button" class="btn" id="mdBack">背面</button><button type="button" class="btn" id="mdReset">↺ 归位</button></div>
+        <div class="md-hint" id="mdHint">月面纹理加载中…</div>
+      </div>
+      <div class="md-list"><h4>月面上的名字</h4><p>月面上大片暗色区域是远古火山熔岩填注形成的「月海」，亮色高地布满环形山。月球背面月海较少。<b>拖动左侧月球转到背面</b>，或点标签自动定位。</p><div class="md-tags" id="mdTags"></div><div class="md-info" id="mdInfo"></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head"><h3>📜 十二月令 · 咏月诗词与雅称</h3><p>古人给十二个月的月亮取了美丽名字，也留下无数咏月篇章</p></div>
+    <div class="poem card"><div class="poem-months" id="poemMonths"></div><div class="poem-body"><div class="poem-alias"><div class="big" id="pmBig"></div><div class="lab" id="pmLab"></div></div><div class="poem-text"><div class="lines" id="pmLines"></div><div class="author" id="pmAuthor"></div><div class="story" id="pmStory"></div></div></div></div>
+  </section>
+
+  <footer>月相奇观 · 真实天文与教学模拟双模式<br>Astronomy Engine 2.1.19（<a href="./assets/vendor/LICENSE.astronomy-engine.txt" target="_blank" rel="noopener">MIT</a>） · 月面纹理沿用原页面 NASA 资源</footer>
+</div>
+<noscript><p style="text-align:center;padding:20px">此页面的月相计算和互动功能需要启用 JavaScript。</p></noscript>
+<script src="./assets/vendor/astronomy.browser.min.js"></script>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
