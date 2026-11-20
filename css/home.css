@@ -39,8 +39,15 @@ h1{font-size:clamp(44px,8vw,78px);font-weight:700;letter-spacing:.12em;backgroun
 .ch-go{flex-shrink:0;align-self:flex-end;padding:10px 20px;border:1px solid var(--gold);border-radius:999px;color:var(--gold);font-size:14px;letter-spacing:.08em;background:rgba(255,218,138,.08);transition:.25s ease}
 .chapter:hover .ch-go{background:var(--gold);color:#1a1206}
 
+/* 第二章及后续正式章节入口（略小于第一章主卡，保持层级） */
+.chapter-alt{padding:22px 28px;margin-top:14px}
+.chapter-alt .ch-icon{font-size:38px}
+.chapter-alt h2{font-size:22px}
+.chapter-alt .ch-desc{font-size:13.5px}
+
 /* 规划中的章节 */
 .chapter-soon{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;padding:16px}
+.chapter-soon.single{grid-template-columns:1fr}
 .soon-item{display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:16px;color:var(--dim)}
 .soon-item b{display:block;font-size:14px;color:var(--muted);letter-spacing:.06em;font-weight:600}
 .soon-item small{font-size:12px}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="第二章·光的方向：跟着早、中、下午的太阳，用八方方位卡认识东西南北和东南、东北、西南、西北，学会自己辨别方向。">
+<title>光的方向 · 八方方位卡 | 追光寻月 · 天空科学探索站</title>
+<link rel="stylesheet" href="./css/directions.css">
+</head>
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<div class="horizon" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">CHAPTER 02 · DIRECTION</div>
+    <h1>光的方向</h1>
+    <div class="subtitle">东西南北 · 东南东北西南西北 · 跟着太阳走</div>
+    <div class="back-home"><a class="home-link" href="../">🧭 返回探索站首页</a></div>
+  </header>
+
+  <section class="section" aria-labelledby="sceneTitle">
+    <div class="sec-head">
+      <h3 id="sceneTitle">☀️ 太阳的一天</h3>
+      <p>这幅图是我们<b>面朝南</b>时看到的天空：左手边是东，右手边是西</p>
+    </div>
+    <div class="scene card">
+      <svg id="sceneSvg" class="p-morning" viewBox="0 0 800 380" role="img" aria-label="太阳一天的位置变化：早上在东边升起，中午升到南方天空最高处，下午向西边落下">
+        <defs>
+          <linearGradient id="skyMorning" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#33427f"/><stop offset="1" stop-color="#e8a68e"/>
+          </linearGradient>
+          <linearGradient id="skyNoon" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3d6fc4"/><stop offset="1" stop-color="#9cc9ec"/>
+          </linearGradient>
+          <linearGradient id="skyAfternoon" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#39396f"/><stop offset="1" stop-color="#f0a95f"/>
+          </linearGradient>
+        </defs>
+        <rect class="sky sky-a" x="0" y="0" width="800" height="300" fill="url(#skyMorning)"/>
+        <rect class="sky sky-b" x="0" y="0" width="800" height="300" fill="url(#skyNoon)"/>
+        <rect class="sky sky-c" x="0" y="0" width="800" height="300" fill="url(#skyAfternoon)"/>
+        <path class="sun-path" d="M 80 300 Q 400 10 720 300" />
+        <g id="sunDot" aria-hidden="true">
+          <circle r="34" class="sun-halo"/>
+          <circle r="18" class="sun-core"/>
+        </g>
+        <rect class="ground" x="0" y="300" width="800" height="80"/>
+        <ellipse id="shadowDot" class="shadow" cx="400" cy="314" rx="36" ry="7"/>
+        <text class="kid-figure" x="400" y="312" text-anchor="middle">🧒</text>
+        <text class="side-label" x="42" y="345">东</text>
+        <text class="side-label" x="744" y="345">西</text>
+        <text class="shadow-label" x="400" y="360" text-anchor="middle">影子总在太阳的反方向</text>
+      </svg>
+      <div class="scene-ctrl">
+        <button type="button" class="btn on period-btn" id="btnMorning" data-period="morning" aria-pressed="true">🌅 早上</button>
+        <button type="button" class="btn period-btn" id="btnNoon" data-period="noon" aria-pressed="false">🌞 中午</button>
+        <button type="button" class="btn period-btn" id="btnAfternoon" data-period="afternoon" aria-pressed="false">🌇 下午</button>
+      </div>
+      <div class="scene-caption" id="sceneCaption" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="compassTitle">
+    <div class="sec-head">
+      <h3 id="compassTitle">🧭 八方方位卡</h3>
+      <p>转动小人的朝向，读出前后左右——面向太阳也能一键搞定</p>
+    </div>
+    <div class="compass card">
+      <div class="compass-stage">
+        <div class="compass-ring" id="compassRing" role="img" aria-label="八方方位卡：上北下南左西右东，斜角是东北、东南、西南、西北">
+          <span class="dir-label" data-dir="北" style="--a:0deg">北</span>
+          <span class="dir-label" data-dir="东北" style="--a:45deg">东北</span>
+          <span class="dir-label" data-dir="东" style="--a:90deg">东</span>
+          <span class="dir-label" data-dir="东南" style="--a:135deg">东南</span>
+          <span class="dir-label" data-dir="南" style="--a:180deg">南</span>
+          <span class="dir-label" data-dir="西南" style="--a:225deg">西南</span>
+          <span class="dir-label" data-dir="西" style="--a:270deg">西</span>
+          <span class="dir-label" data-dir="西北" style="--a:315deg">西北</span>
+          <span class="sun-marker" id="sunMarker" aria-hidden="true">☀️</span>
+          <div class="compass-center">
+            <div class="needle" id="needle" aria-hidden="true"><span class="needle-arrow">▲</span></div>
+            <span class="kid-figure-mini" aria-hidden="true">🧒</span>
+          </div>
+        </div>
+        <div class="compass-panel">
+          <p class="facing-sentence" id="facingSentence" aria-live="polite"></p>
+          <div class="facing-cards">
+            <div class="fcard"><small>前面</small><b id="cardFront">—</b></div>
+            <div class="fcard"><small>后面</small><b id="cardBack">—</b></div>
+            <div class="fcard"><small>左面</small><b id="cardLeft">—</b></div>
+            <div class="fcard"><small>右面</small><b id="cardRight">—</b></div>
+          </div>
+          <div class="dir-btns">
+            <button type="button" class="dir-btn" data-dir="北">北</button>
+            <button type="button" class="dir-btn" data-dir="东北">东北</button>
+            <button type="button" class="dir-btn" data-dir="东">东</button>
+            <button type="button" class="dir-btn" data-dir="东南">东南</button>
+            <button type="button" class="dir-btn" data-dir="南">南</button>
+            <button type="button" class="dir-btn" data-dir="西南">西南</button>
+            <button type="button" class="dir-btn" data-dir="西">西</button>
+            <button type="button" class="dir-btn" data-dir="西北">西北</button>
+            <button type="button" class="btn face-sun" id="btnFaceSun">☀️ 面向太阳</button>
+          </div>
+        </div>
+      </div>
+      <div class="diy-card">
+        <h4>✂️ 做一张自己的方位卡</h4>
+        <ol>
+          <li>拿一张硬纸板，画一个圆，像上面一样写上八个方向；</li>
+          <li>在圆的中心画一个箭头，剪出一个可以转动的箭头指针；</li>
+          <li>白天出门，面向太阳站好，让箭头指向太阳的位置；</li>
+          <li>读卡片：箭头指着的那格，就是你面对的方向，其他方向一眼就找到啦！</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="quizTitle">
+    <div class="sec-head">
+      <h3 id="quizTitle">🎮 辨向闯关</h3>
+      <p>10 道题，全部答对就是「方向小达人」</p>
+    </div>
+    <div class="quiz card" id="quizBox">
+      <div class="quiz-stars" id="quizStars" aria-hidden="true"></div>
+      <div class="quiz-scene" id="quizScene"></div>
+      <div class="quiz-question" id="quizQuestion" aria-live="polite"></div>
+      <div class="quiz-options" id="quizOptions" role="group" aria-label="八个方向选项"></div>
+      <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+      <div class="quiz-actions"><button type="button" class="btn" id="quizNext" hidden>下一题 →</button></div>
+      <div class="quiz-result" id="quizResult" hidden>
+        <div class="score" id="quizScore"></div>
+        <p class="result-note" id="quizNote"></p>
+        <button type="button" class="btn" id="quizRestart">🔄 再玩一次</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>追光寻月 · 小学生天空科学探索站 — 第二章 · 光的方向<br>
+    <a href="../">返回首页</a> · <a href="../moonlight/">第一章 · 追光寻月</a> · 第三方素材见 <a href="../docs/attribution.md">素材说明</a>
+  </footer>
+</div>
+<noscript><p style="text-align:center;padding:20px">互动场景和闯关游戏需要启用 JavaScript。</p></noscript>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>

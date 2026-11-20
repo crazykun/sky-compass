@@ -26,17 +26,17 @@
 
 ```mermaid
 flowchart LR
-    A["🌙 第一章<br/><b>追光寻月</b><br/>✅ 已开放"] --> B["☀️ 第二章<br/><b>光的方向</b><br/>🚧 规划中"]
+    A["🌙 第一章<br/><b>追光寻月</b><br/>✅ 已开放"] --> B["☀️ 第二章<br/><b>光的方向</b><br/>✅ 已开放"]
     B --> C["⭐ 第三章<br/><b>星与罗盘</b><br/>🚧 规划中"]
     style A fill:#2a3a6b,stroke:#ffda8a,color:#ffffff,stroke-width:2px
-    style B fill:#3b3560,stroke:#9c8bd4,stroke-dasharray:5 5,color:#cfc8ee
+    style B fill:#2a3a6b,stroke:#a9c0ff,color:#ffffff,stroke-width:2px
     style C fill:#33355c,stroke:#8fb8f0,stroke-dasharray:5 5,color:#c5d6f5
 ```
 
 | 章节 | 孩子会看到 👀 | 孩子能动手做 ✋ | 状态 |
 |---|---|---|---|
 | 🌙 **追光寻月** | 今晚月亮的真实模样、太阳如何照亮月球、月面上的环形山"疤痕"、古人的咏月诗词 | 翻真实月相日历、拖拽日地月三体模型、转动月球看正反面、玩「月亮变变变」答题 | ✅ 已开放 |
-| ☀️ **光的方向** | 影子从哪里来、日晷怎么计时 | 用影子辨方向的小实验 | 🚧 规划中 |
+| ☀️ **光的方向** | 太阳一天的运行路线（东→南→西）、八个方向的方位罗盘、影子的秘密 | 转动方位卡面向太阳、读出前后左右、闯 10 关辨向游戏、做一张纸质方位卡 | ✅ 已开放 |
 | ⭐ **星与罗盘** | 夜空中最亮的星、北极星在哪 | 认星星、自制星空罗盘 | 🚧 规划中 |
 
 ## 🧒 写给小探险家
@@ -49,6 +49,7 @@ flowchart LR
 2. 找到「🌙 真实月相历」，点一点**今天的日子**，再点**你的生日**，看看那天的月亮。
 3. 去「🪐 三体之舞」**拖一拖**太阳、地球和月亮，猜猜：月亮自己会发光吗？
 4. 点页头的「🧒 小朋友模式」，月亮宝宝会给你讲故事、出题目考你哦！
+5. 再去 [第二章 · 光的方向](https://sky.ailater.com/directions/) 跟着太阳转一圈：转动八方方位卡面向太阳，读出前后左右，最后闯一闯「辨向闯关」！
 
 看完别忘了走到窗边，抬头找一找真正的月亮——**它就在那里，和页面上一模一样。**🌕
 
@@ -75,7 +76,7 @@ flowchart LR
 | `?date=2024-09-18` | 查看指定日期（比如孩子生日、中秋节）的月相 |
 | `?space=1` | 深空主题 |
 
-**适龄建议**：5–7 岁走「小朋友模式」听故事；8–12 岁可以直接玩真实模式 + 三体模型，一年级正是看月相记观察日记的好时候。📓
+**适龄建议**：5–7 岁走「小朋友模式」听故事；8–12 岁可以直接玩真实模式 + 三体模型；第二章的辨向闯关，正好在上学路上实地练习。📓
 
 ## ✨ 站点特色
 
@@ -100,19 +101,23 @@ index.html          首页导航（章节入口）
 css/home.css        首页样式
 js/home.js          首页星空背景
 moonlight/          第一章 · 追光寻月（月相奇观）
-  index.html        章节主页面
+  index.html
   css/  js/         样式与模块（真实天文 / 教学模拟双模式）
   assets/           Astronomy Engine 与月面纹理
   tests/            15 项 Node 算法与静态检查
   docs/science.md   科学口径说明
+directions/         第二章 · 光的方向（跟着太阳辨方向）
+  index.html
+  css/  js/         场景、八方方位卡与闯关模块
+  tests/            9 项方位逻辑与静态检查
 docs/attribution.md 第三方素材与授权
 ```
 
 ## ✅ 质量验证
 
 ```bash
-node --test moonlight/tests/*.test.mjs          # 15 项测试：朔望时刻、照明比例、农历闰月、状态同步…
-for f in moonlight/js/*.js js/home.js; do node --check "$f"; done
+node --test moonlight/tests/*.test.mjs directions/tests/*.test.mjs   # 24 项测试：朔望时刻、照明比例、农历闰月、方位口诀…
+for f in moonlight/js/*.js directions/js/*.js js/home.js; do node --check "$f" || exit 1; done
 ```
 
 已在 1280 / 820 / 480 / 390px 宽度下检查桌面与移动端布局。
